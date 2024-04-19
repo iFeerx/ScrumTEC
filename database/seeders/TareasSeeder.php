@@ -14,7 +14,7 @@ class TareasSeeder extends Seeder
     public function run(): void
     {
         Tarea::factory()
-            ->count(5000)
+            ->count(500)
             ->create();
     }
 }
