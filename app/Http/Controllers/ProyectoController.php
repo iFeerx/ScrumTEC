@@ -12,4 +12,15 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::find($id);
         return view('detalles-proyecto', ['proyecto' => $proyecto]);
     }
+
+    public function administrar()
+    {
+        return view('mostrar_proyectos');
+    }
+
+    public function sprintBoard($id)
+    {
+        $proyecto = Proyecto::find($id);
+        return view('sprint_board', ['proyecto' => $proyecto]);
+    }
 }
