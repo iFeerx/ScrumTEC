@@ -12,10 +12,18 @@ class Sprintboard extends Component
     public $nombre_tarea;
     public $descripcion;
     public $estatus;
+    public $selectedTask = null;
 
     public function mount()
     {
         $this->tareas = Tarea::all();
+    }
+
+    public function showTask($id)
+    {
+        $this->id=$id;
+        //dd('showTask method was called with id: ' . $id);
+        $this->selectedTask = Tarea::find($id);
     }
 
     public function changeEstatus()

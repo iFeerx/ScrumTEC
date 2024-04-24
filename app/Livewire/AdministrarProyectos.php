@@ -23,13 +23,7 @@ class AdministrarProyectos extends Component
     public function render()
     {
         $this->refresh++;
-        $proyectosQuery = Proyecto::query();
-
-        if ($this->search !== '') {
-            $proyectosQuery->where('nombre', 'like', '%' . $this->search . '%');
-        }
-
-        $this->proyectos = $proyectosQuery->get();
+        $this->proyectos = Proyecto::buscarPorNombre($this->search);
 
         return view('livewire.administrar-proyectos', [
             'proyectos' => $this->proyectos->map(function ($proyecto) {

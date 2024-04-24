@@ -11,10 +11,11 @@ class UsuarioLive extends Component
     public $mostrarFormulario = false;
     protected $listeners = ['buscarUsuario'];
     public $control, $nombre, $password, $email, $esfuerzo_semanal, $apodo, $estatus, $remember_token;
+
     public function render()
     {
         $usuarios = Usuario::all();
-        return view('livewire.usuario-live', compact('usuarios'));
+        return view('livewire.usuario-live', ['usuarios'=>$usuarios]);
     }
 
     public function submit()

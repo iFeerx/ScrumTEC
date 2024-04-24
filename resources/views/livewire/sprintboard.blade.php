@@ -18,7 +18,7 @@
       <tr>
       <td>@foreach($tareas as $tarea)
           @if ($tarea->estatus == 'espera')
-              <div data-id="{{ $tarea->id }}">
+              <div data-id="{{ $tarea->id }}" wire:click="showTask({{$tarea->id}})">
                   <p><b>{{ $tarea->nombre }}</b></p>
                   <p>{{ $tarea->descripcion }}</p>
                   <p>{{ $tarea->estatus }}</p>
@@ -141,4 +141,13 @@
       </tr>
   </tbody>
   </table>
+  @if($selectedTask)
+        <div class="modal">
+            <div class="modal-content">
+                <h2>{{ $selectedTask->nombre }}</h2>
+                <p>{{ $selectedTask->descripcion }}</p>
+                <p>{{ $selectedTask->estatus }}</p>
+            </div>
+        </div>
+   @endif
 </div>

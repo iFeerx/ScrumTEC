@@ -40,4 +40,14 @@ class Proyecto extends Model
             }
         return $suma;
     }
+
+    public static function buscarPorNombre($search)
+    {
+        $proyectosQuery = Proyecto::query();
+        if ($search !== '') {
+            $proyectosQuery->where('nombre', 'like', '%' . $search . '%');
+        }
+        $proyectos = $proyectosQuery->get();
+        return $proyectos;
+    }
 }

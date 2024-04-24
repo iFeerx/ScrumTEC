@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProyectoController;
+use App\Livewire\Historialivewire;
+use App\Livewire\UsuarioLive;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +25,9 @@ Route::get('/proyecto/detalle/{id}',[ProyectoController::class,'show']);
 Route::get('/proyecto',[ProyectoController::class,'administrar']);
 
 Route::get('/proyecto/sprintBoard/{id}',[ProyectoController::class,'sprintBoard']);
+
+Route::get('historia/catalogo',Historialivewire::class);
+
+Route::get('usuarios/catalogo',function(){
+    return view("usuarios-catalogo");
+});

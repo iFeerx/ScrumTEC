@@ -1,4 +1,5 @@
 <div>
+    {{$mostrarFormulario}}
     <table>
         <thead>
             <tr>
@@ -13,14 +14,10 @@
                 <th>Remember_token</th>
             </tr>
         </thead>
-
         <tbody>
-
-
             @foreach ($usuarios as $usuario)
                     {{-- AL HACER CLICK A UNA FILA NOS DA EL ID --}}
-                    <tr id="btnModal" onclick="openModalEditar({{ $usuario->id }})">
-
+                    <tr id="btnModal" wire:dblclick="buscarUsuario({{ $usuario->id }})">
                 <td>{{$usuario->id}}</td>
                     <td>{{$usuario->control}}</td>
                     <td>{{$usuario->nombre}}</td>
@@ -39,8 +36,8 @@
 
 
         {{-- AQUI SE VE EL METODO PARA EDITAR A UN USUARIO--}}
-
-        <dialog class="modalEditar" id="editarModal">
+        @if ($mostrarFormulario)
+        <div id="editarModal" class="modal-error">
             <form wire:submit.prevent="update({{ $usuario->id }})">
                 <label for="control">Control</label>
                 <input type="text"  wire:model="control">
@@ -69,8 +66,8 @@
                 <button id="update" onclick="closeModalEditar()" wire:click='update("{{$usuario->id}}")'>Editar</button>
                 <button onclick="closeModalEditar()">Salir</button>
             </form>
-        </dialog>
-
+        </div>
+        @endif
 
         {{-- AQUI SE VE EL METODO PARA REGISTRAR A UN USUARIO--}}
 
@@ -108,38 +105,3 @@
     </dialog>
 
 </div>
-
-<script>
-const modal = document.getElementById("mainModal");
-const modalEditar = document.getElementById("editarModal");
-
-
-    function seleccionarFila(id) {
-        console.log("ID seleccionado:", id);
-    }
-
-    const openModal = () =>{
-        modal.showModal()
-
-    }
-
-    const closeModal = () =>{
-        modal.close();
-    }
-//MODALES PARA EDITAR
-const openModalEditar = (id) => {
-    console.log("ID recibido:", id); // Verificar el valor de ID
-    modalEditar.showModal();
-    Livewire.component('UsuarioLive').call('buscarUsuario', id);
-}
-
-
-    const closeModalEditar = () =>{
-        modalEditar.close();
-    }
-
-
-
-    </script>
-        @livewireScripts
-
