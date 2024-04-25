@@ -11,13 +11,12 @@ class Rol extends Model
     use HasFactory;
     protected $table="roles";
 
-
     public function proyecto()
     {
-        return $this->hasOne(Proyecto::class,"proyecto_id","id");
+        return $this->hasOne(Proyecto::class,"id","proyecto_id");
     }
     public function usuario()
     {
-        return $this->hasOne(Usuario::class,"usuario_id","id");
+        return $this->hasOne(Usuario::class,"id","usuario_id");
     }
 }

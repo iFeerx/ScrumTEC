@@ -26,7 +26,25 @@
                 @endforeach
             </tbody>
         </table>
-
+        <h2>Usuarios</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Historia</th>
+                    <th>Avance</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($proyecto->roles as $rol)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $rol->usuario->nombre }}</td>
+                        <td>{{ $rol->rol}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
         <input type="submit" value="Agregar">
 

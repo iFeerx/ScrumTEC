@@ -16,6 +16,11 @@ class Proyecto extends Model
         return $this->hasMany(Historia::class,"proyecto_id","id");
     }
 
+    public function roles()
+    {
+        return $this->hasMany(Rol::class,"proyecto_id","id");
+    }
+
     public function product_owner() {
 
     }
@@ -25,8 +30,8 @@ class Proyecto extends Model
         //where roles.rol = 'Scrum master' and roles.proyecto_id = $this.id
         return Usuario::join('roles','roles.usuario_id','usuarios.id')
             ->where([['rol','Scrum master'],['proyecto_id',$this->id]])->get();
-
     }
+
     public function team_leaders() {}
     public function developers() {}
     public function reviewrs() {}

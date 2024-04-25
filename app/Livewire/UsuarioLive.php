@@ -9,46 +9,58 @@ use Illuminate\Database\QueryException;
 class UsuarioLive extends Component
 {
     public $mostrarFormulario = false;
-    protected $listeners = ['buscarUsuario'];
+    public $mostrarFormulario2= false;
+    public $showEditModal = false; // Controla si el modal de edición está visible
+    public $selectedUsuario; // Almacena el usuario seleccionado para editar o eliminar
     public $control, $nombre, $password, $email, $esfuerzo_semanal, $apodo, $estatus, $remember_token;
-
     public function render()
     {
         $usuarios = Usuario::all();
         return view('livewire.usuario-live', ['usuarios'=>$usuarios]);
+
     }
 
+    //METODO PARA AGREGAR A UN USUARIO
     public function submit()
     {
+        $usuario = new Usuario();
+        $usuario->control = $this->control;
+        $usuario->nombre = $this->nombre;
+        $usuario->password = bcrypt($this->password);
+        $usuario->email = $this->email;
+        $usuario->esfuerzo_semanal = $this->esfuerzo_semanal;
+        $usuario->apodo = $this->apodo;
+        $usuario->estatus = $this->estatus;
+
+        $usuario->save();
+
+        $this->cerrarModal2();
+
+    }
+
+    //METODO PARA ELIMINAR AL USUARIO
+    public function eliminar($id)
+    {
         try {
-            // Intenta guardar el nuevo usuario
-            $usuario = new Usuario();
-            $usuario->control = $this->control;
-            $usuario->nombre = $this->nombre;
-            $usuario->password = $this->password;
-            $usuario->email = $this->email;
-            $usuario->esfuerzo_semanal = $this->esfuerzo_semanal;
-            $usuario->apodo = $this->apodo;
-            $usuario->estatus = $this->estatus;
-            $usuario->remember_token = $this->remember_token;
-            $usuario->save();
+            $usuario = Usuario::findOrFail($id);
 
 
-        } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1048) {
-                session()->flash('error', 'El campo control no puede estar vacío.');
-            } else {
-                throw $e;
-            }
+            $usuario->delete();
+
+            return response()->json(['message' => 'Usuario eliminado con éxito'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al eliminar el usuario'], 500);
         }
     }
 
-    // Método para buscar un usuario por su ID
+    //METODO PARA BUSCAR USUARIO POR ID
     public function buscarUsuario($id)
     {
         //dd("Entro");
         $usuario = Usuario::findOrFail($id);
-
+        //Se guarda en esta variable el usuario seleccionado.
+        $this->selectedUsuario = $usuario;
+            //Muestra los datos
             $this->control = $usuario->control;
             $this->nombre = $usuario->nombre;
             $this->password = $usuario->password;
@@ -56,20 +68,36 @@ class UsuarioLive extends Component
             $this->esfuerzo_semanal = $usuario->esfuerzo_semanal;
             $this->apodo = $usuario->apodo;
             $this->estatus = $usuario->estatus;
-            $this->remember_token = $usuario->remember_token;
             $this->mostrarFormulario = true;
 
 
 
     }
 
-
-
-    //metodo para actualizar
-
-    public function update($id)
+    //METODO PARA ABRIR EL MODAL REGISTRO
+    public function abrirModal2()
     {
-        $usuario = Usuario::findOrFail($id);
+        $this->mostrarFormulario2 = true;
+
+    }
+    //METODO PARA ABRIR EL MODAL REGISTRO
+    public function cerrarModal2()
+    {
+        $this->mostrarFormulario2 = false;
+
+    }
+
+    //METODO PARA CERRAR EL MODAL EDITAR
+    public function cerrarModalEditar()
+    {
+        // Cierra el modal
+        $this->mostrarFormulario = false;
+    }
+
+    //METODO PARA ACTUALIZAR
+    public function update($control)
+    {
+        $usuario = Usuario::findOrFail($control);
 
         $usuario->control = $this->control;
         $usuario->nombre = $this->nombre;
@@ -81,6 +109,8 @@ class UsuarioLive extends Component
         $usuario->remember_token= $this->remember_token;
 
         $usuario->save();
+
+
 
     }
 

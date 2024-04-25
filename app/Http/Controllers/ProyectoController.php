@@ -23,4 +23,9 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::find($id);
         return view('sprint_board', ['proyecto' => $proyecto]);
     }
+
+    public function nuevoProyecto()
+    {
+        return view('agregar-proyectos');
+    }
 }

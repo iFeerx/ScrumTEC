@@ -7,12 +7,12 @@ use Livewire\Component;
 
 class Sprintboard extends Component
 {
+    public $selectedTask = null;
     public $tareas;
-    public $tarea_id;
-    public $nombre_tarea;
+    public $id=0;
+    public $nombre;
     public $descripcion;
     public $estatus;
-    public $selectedTask = null;
 
     public function mount()
     {
@@ -26,12 +26,17 @@ class Sprintboard extends Component
         $this->selectedTask = Tarea::find($id);
     }
 
+    public function closeModal()
+    {
+        $this->selectedTask = null;
+    }
+
     public function changeEstatus()
     {
-        $this->tareas = $this->paises[$this->tarea_id]
-            ->tareas->sortBy('nombre')->keyBy('id');
-        $this->tarea_id = 0;
-        $this->nombre_tarea = " ";
+        $this->tareas = $this->tareas[$this->id]
+        ->tareas->sortBy('nombre')->keyBy('id');
+        $this->id = 0;
+        $this->nombre = " ";
         $this->descripcion = " ";
         $this->estatus = " ";
     }
@@ -58,7 +63,7 @@ class Sprintboard extends Component
 
     public function render()
     {
-        return view('livewire.sprintboard', ['tareas' => $this->tareas]);
+        return view('livewire.sprintboard');
     }
 
 }
