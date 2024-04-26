@@ -1,3 +1,8 @@
+@import '@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '@fortawesome/fontawesome-free/css/regular.css';
+@import '@fortawesome/fontawesome-free/css/solid.css';
+@import '@fortawesome/fontawesome-free/css/brands.css';
+
 .modal {
     position: fixed;
     z-index: 1;
@@ -24,7 +29,7 @@ table {
 }
 
 table th, table td {
-    width: 10%; /* Divide el ancho de la tabla entre el número de columnas */
+    /*width: 10%; /* Divide el ancho de la tabla entre el número de columnas */
     vertical-align: top;
     border: 1px solid black; /* Añade una frontera a las celdas */
 

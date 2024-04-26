@@ -34,7 +34,7 @@ class Historialivewire extends Component
         $historias = Historia::all();
         $proyectos = Proyecto::all();
         return view('livewire.historia-catalogo',
-        compact('historias'));
+        ['historias'=>$historias, 'proyectos'=>$proyectos]);
     }
 
     public function editar($id){
