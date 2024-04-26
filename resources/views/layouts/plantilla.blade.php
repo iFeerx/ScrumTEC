@@ -4,7 +4,12 @@
         @vite(['resources/css/app.css','resources/sass/global/sprintboard.scss', 'resources/js/app.js'])
     </head>
     <body>
-        @section('main')
-            @show
+        <main id="main">
+            @section('main')
+                @if (isset($main))
+                    {{$main}}
+                @endif
+                @show
+        </main>
     </body>
 </html>
