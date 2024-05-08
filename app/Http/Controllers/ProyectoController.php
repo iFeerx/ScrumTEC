@@ -10,7 +10,7 @@ class ProyectoController extends Controller
     public function show($id)
     {
         $proyecto = Proyecto::find($id);
-        return view('detalles-proyecto', ['proyecto' => $proyecto]);
+        return view('detalles-proyecto', ['id' => $id]);
     }
 
     public function administrar()

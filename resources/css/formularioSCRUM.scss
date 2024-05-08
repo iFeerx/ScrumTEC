@@ -1,0 +1,35 @@
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+form {
+    width: 400px;
+    height: auto;
+    padding: 29px;
+    margin-top: 20px;
+    align-content: center;
+    border: #b8b8b8 1px solid;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}

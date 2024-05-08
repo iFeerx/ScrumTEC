@@ -138,7 +138,33 @@
                 <h2>{{ $selectedTask->nombre }}</h2>
                 <p>{{ $selectedTask->descripcion }}</p>
                 <h3>{{ $selectedTask->estatus }}</h3>
+                @if ($selectedTask->estatus == "codificando")
                 <livewire:ArchivosAdjuntables id="{{$selectedTask->id}}" />
+                @endif
+                @if ($selectedTask->estatus == "revisando")
+                <div>
+                    <h2>Archivos adjuntos:</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>URL</th>
+                                <th>Descargar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($selectAdjuntos as $archivo)
+                                <tr>
+                                    <td>{{ $archivo->nombre }}</td>
+                                    <td>{{ $archivo->url }}</td>
+                                    <td><a href="{{ Storage::url($archivo->url) }}" download>Descargar</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <button wire:click="revisarTarea({{$tarea->id}})">Revisado</button>
+                @endif
             </div>
         </div>
     @endif

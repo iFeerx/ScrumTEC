@@ -11,6 +11,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    top:0;
+    position: fixed;
 }
 
 *{
@@ -41,6 +43,10 @@
     text-decoration: none;
     padding: 10px 20px;
 }
+
+
+
+
 
 .title{
     cursor: pointer;
@@ -82,6 +88,7 @@
     padding: 10px;
     margin-right: 15px;
 }
+
 
 .navbar-nav:hover{
     cursor: pointer;

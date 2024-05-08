@@ -1,12 +1,12 @@
 <!-- resources/views/livewire/administrar-proyectos.blade.php -->
-<div>
+<div class="tabla-scrum">
     <h1>Proyectos {{$refresh}}</h1>
 
     <div>
         <label for="search">Buscar nombre de proyecto:</label>
         <input type="text" id="search" wire:model="search"/>
-        <button wire:click="buscar">Buscar</button>
-        <button wire:click="agregarProyecto" target="_blank">Agregar proyecto</button>
+        <button class="boton-Azul" wire:click="buscar"><i class="fa-solid fa-magnifying-glass" style="margin-right: 7px">Buscar</button>
+        <button class="boton-Azul" wire:click="agregarProyecto" target="_blank">Agregar proyecto</button>
     </div>
     <table>
         <thead>

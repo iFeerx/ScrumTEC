@@ -5,6 +5,10 @@
         @livewireStyles()
     </head>
     <body>
+        <nav id='nav'>
+            @section('nav')
+                @include('layouts.components.menu_principal')
+        </nav>
         <main id="main">
             @section('main')
                 @if (isset($main))

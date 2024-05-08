@@ -3,6 +3,10 @@
     <a class="boton-Etiqueta" href="/">Página de inicio</a>
 
     @if(Session::has('usuario'))
+    @php
+        $usuario = Session::get('usuario');
+        $proyectos = $usuario->proyectos;
+    @endphp
     <!-- Mostrar opciones para usuarios autenticados -->
     <ul class="navbar-nav">
         <li class="nav-item dropdown">
