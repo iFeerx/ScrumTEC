@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire;
+use App\Models\Adjunto;
 use App\Models\Tarea;
 USE illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
@@ -13,6 +14,8 @@ class Sprintboard extends Component
     public $nombre;
     public $descripcion;
     public $estatus;
+    public $selectAdjuntos = null;
+    public $refresh = 0;
 
     public function mount()
     {
@@ -24,11 +27,15 @@ class Sprintboard extends Component
         $this->id=$id;
         //dd('showTask method was called with id: ' . $id);
         $this->selectedTask = Tarea::find($id);
+        $this-> selectAdjuntos = Adjunto::where('tarea_id', $this->id)->get();
+
     }
 
     public function closeModal()
     {
         $this->selectedTask = null;
+        $this->selectAdjuntos = null;
+
     }
 
     public function changeEstatus()
@@ -61,9 +68,23 @@ class Sprintboard extends Component
         }
     }
 
+    public function revisarTarea($taskId){
+        Tarea::find($taskId)->update(['estatus' => 'revisado']);
+        // Refresca las tareas después de cambiar el estado
+        $this->mount();
+        // Mensaje de éxito
+        session()->flash('success', 'Tarea revisada exitosamente');
+        $this->closeModal();
+    }
+
     public function render()
     {
+        $this->refresh++;
         return view('livewire.sprintboard');
     }
 
+    public function incrementar()
+    {
+        $this->refresh++;
+    }
 }

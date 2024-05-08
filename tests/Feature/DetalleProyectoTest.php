@@ -12,7 +12,7 @@ class DetalleProyectoTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
+    public function test_detalle_proyecto(): void
     {
         $proyecto = Proyecto::all()->first();
         $response = $this->get('/proyecto/detalle/'.$proyecto->id);

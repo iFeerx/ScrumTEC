@@ -1,7 +1,8 @@
 <html>
     <head>
         <title>@yield('titulo')</title>
-        @vite(['resources/css/app.css','resources/sass/global/sprintboard.scss', 'resources/js/app.js'])
+        @vite(['resources/css/app.scss', 'resources/js/app.js'])
+        @livewireStyles()
     </head>
     <body>
         <main id="main">
@@ -11,5 +12,6 @@
                 @endif
                 @show
         </main>
+        @livewireScripts()
     </body>
 </html>

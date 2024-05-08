@@ -1,5 +1,7 @@
-<div>
-    <table>
+<div class="tabla-scrum">
+    {{$refresh}}
+    <button wire:click="incrementar">+</button>
+    <table >
         <thead>
             <tr>
                 <th>Espera</th>
@@ -136,6 +138,7 @@
                 <h2>{{ $selectedTask->nombre }}</h2>
                 <p>{{ $selectedTask->descripcion }}</p>
                 <h3>{{ $selectedTask->estatus }}</h3>
+                <livewire:ArchivosAdjuntables id="{{$selectedTask->id}}" />
             </div>
         </div>
     @endif

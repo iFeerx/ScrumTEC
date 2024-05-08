@@ -2,6 +2,9 @@
 @import '@fortawesome/fontawesome-free/css/regular.css';
 @import '@fortawesome/fontawesome-free/css/solid.css';
 @import '@fortawesome/fontawesome-free/css/brands.css';
+@import 'botonesSCRUM.scss';
+@import 'menuSCRUM.scss';
+@import 'tablasSCRUM.scss';
 
 .modal {
     position: fixed;
@@ -22,7 +25,7 @@
     width: 80%;
 }
 
-table {
+.table {
     width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
     table-layout: fixed; /* Hace que todas las celdas tengan el mismo ancho */
     border-collapse: collapse; /* Combina las fronteras adyacentes en una sola frontera */

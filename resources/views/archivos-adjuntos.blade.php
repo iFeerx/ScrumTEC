@@ -1,7 +1,8 @@
 @extends('layouts.plantilla')
-@section('titulo','sprintboard')
+@section('titulo','Livewire')
 @section('main')
     <main>
-        <livewire:sprintboard/>
+        <livewire:archivos-adjuntables/>
     </main>
+
 @endsection

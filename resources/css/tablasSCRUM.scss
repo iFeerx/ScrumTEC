@@ -1,0 +1,36 @@
+.tabla-scrum {
+    padding: 4rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #8d8d8d;
+
+        th {
+            padding: 15px;
+            background-color: #1d3474;
+            text-align: center;
+            color: #fff;
+        }
+
+        td {
+            text-align: start;
+            padding: 9px;
+            border: 1px solid #8d8d8d;
+        }
+
+        tr {
+            text-align: right;
+            font-weight: bold;
+
+            &:nth-child(even) {
+                background-color: #ffffff;
+            }
+        }
+    }
+}
+.acciones {
+    justify-content:space-between;
+    display: flex;
+}

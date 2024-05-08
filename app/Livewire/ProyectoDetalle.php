@@ -15,9 +15,6 @@ class ProyectoDetalle extends Component
     public function rules(): array
     {
         return [
-            'nombre' => 'required',
-            'proyecto_id' => 'required|exists:proyectos,id',
-            'historia' => 'required'
         ];
     }
 
