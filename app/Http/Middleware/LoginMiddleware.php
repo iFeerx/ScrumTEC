@@ -21,7 +21,7 @@ class LoginMiddleware
         if (Session::has('usuario')) {
             return $next($request);
         } else {
-            return redirect('/usuarios/login');
+            return redirect('/');
         }
     }
 }
