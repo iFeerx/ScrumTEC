@@ -1,13 +1,17 @@
 //Hoja de estilo tarjetasSCRUM
 
 .div-tarjeta01 {
-    width: 500px;
-    height: 250px;
+    min-width: 250px;
+    min-height: 100px;
     border: 3px solid #b8cce4;
     border-radius: 4px;
     background-color: #b8cce4;
     font-family: "Segoe UI", Arial, sans-serif;
     text-align: center;
+    @extend .w3-card-4;
+    margin: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
 }
 
 .div-tarjeta02 {

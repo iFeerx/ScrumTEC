@@ -21,9 +21,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'espera')
-                            <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                            <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -32,9 +31,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'codificando')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -43,9 +41,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'revisando')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -54,9 +51,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'probando')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -65,9 +61,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'terminado')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -76,9 +71,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'corrigiendo')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -87,9 +81,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'codificado')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -98,9 +91,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'revisado')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -109,9 +101,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'probado')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
@@ -120,9 +111,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'atascado')
-                        <div data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                        <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->descripcion }}</p>
                                 <p>{{ $tarea->estatus }}</p>
                             </div>
                         @endif
