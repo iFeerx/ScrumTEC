@@ -10,6 +10,10 @@
 @import 'formularioSCRUM';
 @import 'tarjetasSCRUM';
 
+main{
+    padding-top: 50px;
+}
+
 .modal {
     position: fixed;
     z-index: 1;

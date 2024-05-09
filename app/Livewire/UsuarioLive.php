@@ -31,7 +31,6 @@ class UsuarioLive extends Component
         $usuario->esfuerzo_semanal = $this->esfuerzo_semanal;
         $usuario->apodo = $this->apodo;
         $usuario->estatus = $this->estatus;
-
         $usuario->save();
 
         $this->cerrarModal2();

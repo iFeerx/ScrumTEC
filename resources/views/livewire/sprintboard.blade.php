@@ -1,6 +1,4 @@
 <div class="tabla-scrum">
-    {{$refresh}}
-    <button wire:click="incrementar">+</button>
     <table >
         <thead>
             <tr>
@@ -24,6 +22,7 @@
                             <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{ $tarea->nombre }}</b></p>
                                 <p>{{ $tarea->estatus }}</p>
+                                <p>{{ $tarea->encoder_date }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -34,6 +33,7 @@
                         <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
                                 <p>{{ $tarea->estatus }}</p>
+                                <p>{{ $tarea->encoder_date }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -44,6 +44,7 @@
                         <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
                                 <p>{{ $tarea->estatus }}</p>
+                                <p>{{ $tarea->reviewer_date }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -54,6 +55,7 @@
                         <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
                                 <p>{{ $tarea->estatus }}</p>
+                                <p>{{ $tarea->tester_date }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -64,6 +66,7 @@
                         <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
                                 <p>{{ $tarea->estatus }}</p>
+                                <p>{{ $tarea->encoding_finish_date }}</p>
                             </div>
                         @endif
                     @endforeach

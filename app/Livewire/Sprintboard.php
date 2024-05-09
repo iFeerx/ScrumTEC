@@ -15,7 +15,6 @@ class Sprintboard extends Component
     public $descripcion;
     public $estatus;
     public $selectAdjuntos = null;
-    public $refresh = 0;
 
     public function mount()
     {
@@ -79,7 +78,6 @@ class Sprintboard extends Component
 
     public function render()
     {
-        $this->refresh++;
         return view('livewire.sprintboard');
     }
 

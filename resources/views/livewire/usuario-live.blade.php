@@ -1,4 +1,4 @@
-<div>
+<div class="tabla-scrum">
     <table>
         <thead>
             <tr>
@@ -35,7 +35,7 @@
 
  {{-- AQUI SE VE EL METODO PARA EDITAR A UN USUARIO--}}
  @if ($mostrarFormulario)
- <div id="editarModal" class="modal-error"> {{-- Poner Estilo--}}
+ <form id="editarModal" class="modal-error"> {{-- Poner Estilo--}}
          <label for="control">Control</label>
          <input type="text"  wire:model="control">
          <br>
@@ -57,10 +57,10 @@
          <label for="estatus">Estatus</label>
          <input type="text" wire:model="estatus">
          <br>
-         <button id="update" wire:click='update("{{ $selectedUsuario->id }}")' wire:click='cerrarModalEditar()'>Editar</button>
-         <button id="eliminar" wire:click='eliminar("{{ $selectedUsuario->id }}")' wire:click='cerrarModalEditar()'>Eliminar</button>
-         <button wire:click='cerrarModalEditar()'>Salir</button>
- </div>
+         <button id="update" wire:click='update("{{ $selectedUsuario->id }}")' wire:click='cerrarModalEditar()' class="boton-Modificar02"><i class="fa-regular fa-pen-to-square"></i></button>
+         <button id="eliminar" wire:click='eliminar("{{ $selectedUsuario->id }}")' wire:click='cerrarModalEditar()' class="boton-Basura"><i class="fa-solid fa-trash"></i></button>
+         <button wire:click='cerrarModalEditar()' class="boton-Rojo">Cancelar</button>
+ </form>
  @endif
 
 
@@ -68,7 +68,7 @@
 
 
     {{-- Botón para abrir el modal de registro --}}
-    <button wire:click="abrirModal2()">Registrar</button>
+    <button wire:click="abrirModal2()" class="boton-Azul">Registrar</button>
     @if ($mostrarFormulario2)
     {{-- Div donde guardo los datos del modal Registro --}}
     <div class="modal" id="mainModal"> {{-- Poner Estilo--}}
@@ -97,9 +97,10 @@
         <label for="remember_token">Remember_token</label>
         <input type="text" wire:model="remember_token">
 
-        <button type="submit">Guardar</button>
+        <button type="submit" class="boton-Verde">Guardar</button>
+        <button wire:click="cerrarModal2()" class="boton-Rojo">Cancelar</button>
+
     </form>
-        <button wire:click="cerrarModal2()">Salir</button>
 
 </div>
 @endif

@@ -49,4 +49,7 @@ class ProyectoDetalle extends Component
 
     }
 
+    public function closeModal() {
+        $this->mostrarAgregarRol = false;
+    }
 }

@@ -50,9 +50,9 @@
         <button wire:click="mostrarAgregarRoles">Agregar Rol</button>
         <br>
         @if ($mostrarAgregarRol)
-        <div>
+        <div class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close-button" wire:click="closeModal">×</span>
                 <!-- Contenido del modal -->
                 <form id="agregarForm">
                     <!-- Combobox para seleccionar usuario -->
@@ -73,7 +73,7 @@
                         @endforeach
                     </select>
                 </form>
-                <button wire:click="agregarRol">Agregar</button>
+                <button class="boton-Azul" wire:click="agregarRol">Agregar</button>
             </div>
         </div>
     @endif
