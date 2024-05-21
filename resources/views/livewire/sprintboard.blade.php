@@ -155,8 +155,15 @@
                         </table>
                     </div>
                     @if ($selectedTask->estatus == "revisando")
-                        <button wire:click="revisarTarea({{$tarea->id}})">Revisado</button>
+                    <h2>Agregar comentarios:</h2>
+                        <div>
+                            <textarea class="textarea" wire:model='comentarios'  placeholder="Escribe tus comentarios aquí...">
+                            </textarea>
+                        </div>
+                        <button class="boton-Verde" wire:click="revisarTarea({{$selectedTask->id}})">Revisado</button>
+                        <button class="boton-Amarillo" wire:click="regresarTarea({{$selectedTask->id}})">No aprobado</button>
                     @endif
+
                 @endif
                 <p>Comentarios</p>
                 <hr style="border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-top: -20px; margin-bottom: -5px;">

@@ -10,53 +10,53 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Scrum Master</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Fecha de entrega</th>
-                <th>Esfuerzo estimado del proyecto</th>
-                <th>Acciones</th>
+                <th style="width: 2%;">Id</th>
+                <th style="width: 10%;">Nombre Encargado</th>
+                <th style="width: 10%;">Nombre Proyecto</th>
+                <th style="width: 30%;" >Descripción</th>ss
+                <th style="width: 8%;">Fecha de Entrega</th>
+                <th style="width: 5%;">Esfuerzo requerido</th>
+                <th style="width: 5%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($proyectos as $proyecto)
-            <tr>
-                <td>{{ $proyecto->id }}</td>
-                <td>{{ $proyecto->scrum_master}}</td>
-                <td>
-                    @if ($proyectoSeleccionado && $proyectoSeleccionado->id === $proyecto->id)
-                        <input type="text" wire:model="nombre">
-                    @else
-                        {{ $proyecto->nombre }}
-                    @endif
-                </td>
-                <td>
-                    @if ($proyectoSeleccionado && $proyectoSeleccionado->id === $proyecto->id)
-                        <textarea wire:model="descripcion"></textarea>
-                    @else
-                        <div class="textoTruncado">{{ $proyecto->descripcion }}</div>
-                    @endif
-                </td>
-                <td>{{ \Carbon\Carbon::parse($proyecto->fecha_entrega)->format('d/m/Y') }}</td>
-                <td>{{ $this->obtenerEsfuerzoEstimadoAcumulado($proyecto->id) }}</td>
-                <td>
-                    <div class="acciones">
-                        @if (!$proyectoSeleccionado || $proyectoSeleccionado->id !== $proyecto->id)
-                            <button wire:click="seleccionarProyecto({{ $proyecto->id }})" class="boton-Modificar02">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </button>
+                <tr>
+                    <td>{{ $proyecto->id }}</td>
+                    <td>{{ $proyecto->scrumMasters?$proyecto->scrumMasters->first()->nombre:" "}}</td>
+                    <td>
+                        @if ($proyectoSeleccionado && $proyectoSeleccionado->id === $proyecto->id)
+                            <input type="text" wire:model="nombre">
                         @else
-                            <button wire:click="actualizarProyecto" class="boton-Palomita">
-                                <i class="fa-solid fa-check"></i>
-                            </button>
+                            {{ $proyecto->nombre }}
                         @endif
-                        <button wire:click="eliminarProyecto({{ $proyecto->id }})" class="boton-Basura">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        @if ($proyectoSeleccionado && $proyectoSeleccionado->id === $proyecto->id)
+                            <textarea wire:model="descripcion"></textarea>
+                        @else
+                            <div class="textoTruncado">{{ $proyecto->descripcion }}</div>
+                        @endif
+                    </td>
+                    <td>{{ \Carbon\Carbon::parse($proyecto->fecha_entrega)->format('d/m/Y') }}</td>
+                    <td>{{ $this->obtenerEsfuerzoEstimadoAcumulado($proyecto->id) }} hrs</td>
+                    <td>
+                        <div class="acciones">
+                            @if (!$proyectoSeleccionado || $proyectoSeleccionado->id !== $proyecto->id)
+                                <button wire:click="seleccionarProyecto({{ $proyecto->id }})" class="boton-Modificar02">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            @else
+                                <button wire:click="actualizarProyecto" class="boton-Palomita">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                            @endif
+                            <button wire:click="eliminarProyecto({{ $proyecto->id }})" class="boton-Basura">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
@@ -69,7 +69,7 @@
                 <label for="descripcion">Descripcion:</label><br>
                 <input type="text" id="descripcion" wire:model="descripcion"><br>
                 <label for="usuario">Usuario:</label><br>
-                <select wire:model="usuario">
+                <select wire:model="usuario_id">
                     <option value="">Seleccionar Usuario</option>
                     @foreach($usuarios as $usuario)
                         <option value="{{ $usuario->id }}">{{ $usuario->nombre }}</option>

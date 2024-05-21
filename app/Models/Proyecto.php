@@ -30,12 +30,12 @@ class Proyecto extends Model
     public function product_owner() {
 
     }
-    public function scrum_masters() {
+    public function getScrumMastersAttribute() {
         //select usuarios.* form usuarios
         //inner join roles on (roles.usuario_id == usuarios.id)
         //where roles.rol = 'Scrum master' and roles.proyecto_id = $this.id
         return Usuario::join('roles','roles.usuario_id','usuarios.id')
-            ->where([['rol','Scrum master'],['proyecto_id',$this->id]])->get()->first();
+            ->where([['rol','Scrum master'],['proyecto_id',$this->id]])->get();
     }
 
     public function team_leaders() {}

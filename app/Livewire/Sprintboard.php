@@ -22,7 +22,7 @@ class Sprintboard extends Component
     public $selectedUser = null;
     public $selectedTester = null;
     public $selectedReviewer = null;
-    public $comentario;
+    public $comentarios;
 
     public function mount()
     {
@@ -39,6 +39,7 @@ class Sprintboard extends Component
         $this->selectedUser = $this->selectedTask->encoder;
         $this->selectedTester = $this->selectedTask->tester;
         $this->selectedReviewer = $this->selectedTask->reviewer;
+        $this->comentarios = $this->selectedTask->comentarios;
     }
 
     public function closeModal()
@@ -102,7 +103,10 @@ class Sprintboard extends Component
     }
 
     public function revisarTarea($taskId){
-        Tarea::find($taskId)->update(['estatus' => 'revisado']);
+        Tarea::find($taskId)->update(
+            ['estatus' => 'revisado',
+             'comentarios' => $this->comentarios,
+        ]);
         // Refresca las tareas después de cambiar el estado
         $this->mount();
         // Mensaje de éxito
@@ -111,12 +115,12 @@ class Sprintboard extends Component
     }
 
     public function regresarTarea($taskId){
-        $comentario = $this->comentario; // Obtener el comentario desde el componente Livewire
+        $comentarios = $this->comentarios; // Obtener el comentario desde el componente Livewire
 
         // Actualizar la tarea con el nuevo estado y comentario
         Tarea::find($taskId)->update([
             'estatus' => 'codificando',
-            'comentario' => $comentario, // Asignar el comentario a la columna correspondiente en la tabla de tareas
+            'comentarios' => $comentarios, // Asignar el comentario a la columna correspondiente en la tabla de tareas
         ]);
 
         // Mostrar un mensaje de depuración en la consola del navegador

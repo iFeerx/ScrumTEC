@@ -14,11 +14,11 @@ class AdministrarProyectos extends Component
     public $descripcion;
     public $fecha_entrega;
     public $search = '';
-    public $usuario;
     public $refresh = 0;
     public $proyectoId;
     public $mostrarModal = false;
     public $usuarios;
+    public $usuario_id;
 
     public function mount()
     {
@@ -89,6 +89,7 @@ class AdministrarProyectos extends Component
         $proyecto->save();
         $rol= new Rol();
         $rol->proyecto_id=$proyecto->id;
+        $rol->usuario_id=$this->usuario_id;
         $rol->rol="Scrum master";
         $rol->save();
 
