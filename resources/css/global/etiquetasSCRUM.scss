@@ -1,0 +1,67 @@
+.tag {
+    width: fit-content;
+    padding: 3px 8px 3px 8px;
+    border-radius: 8px;
+    &.verde {
+        background-color: #8ed8ac;
+        color: #005135;
+    }
+    &.azul {
+        background-color: #92c1e9;
+        color: #023256;
+    }
+    &.rosa {
+        background-color: #f98fab;
+        color: #600606;
+    }
+    &.morado {
+        background-color: #f4bdf0;
+        color: #562249;
+    }
+    &.lavanda {
+        background-color: #c2b2f1;
+        color: #2b234f;
+    }
+    &.amarillo {
+        background-color: #fff5bb;
+        color: #a57407;
+    }
+    &.naranja {
+        background-color: #f1c888;
+        color: #6b2a10;
+    }
+    &.rojo {
+        background-color: #d23835;
+        color: #ffffff;
+    }
+    &.gris {
+        background-color: #cbccca;
+        color: #383e42;
+    }
+    &.verde-marron {
+        background-color: #bacfad;
+        color: #2e2b1d;
+    }
+}
+
+.bg-green-500 {
+    background-color: #34D399;
+}
+
+.bg-blue-500 {
+    background-color: #3B82F6;
+}
+
+.bg-gray-500 {
+    background-color: #6B7280;
+}
+.bg-orange-500 {
+    background-color: #F59E0B;
+}
+.bg-purple-500 {
+    background-color: #8B5CF6;
+}
+.bg-red-500 {
+    background-color: #EF4444;
+}
+

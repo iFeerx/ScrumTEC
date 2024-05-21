@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('proyectos', function (Blueprint $table) {
             $table->id();
             $table->string("nombre",200);
+            //$table->foreignId("encargado_id")->references('id')->on('usuarios');
             $table->text("descripcion")->nullable();
             $table->date("fecha_entrega")->nullable();
             $table->timestamps();

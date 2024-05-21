@@ -1,27 +1,23 @@
 //Hoja de estilo tarjetasSCRUM
 
 .div-tarjeta01 {
-    min-width: 250px;
-    min-height: 100px;
-    border: 3px solid #b8cce4;
-    border-radius: 4px;
-    background-color: #b8cce4;
-    font-family: "Segoe UI", Arial, sans-serif;
-    text-align: center;
-    @extend .w3-card-4;
-    margin: 10px;
-    margin-bottom: 30px;
-    overflow: hidden;
+    cursor: pointer;
+    font-size: 15px;
+    color:#22272bfc;
+    padding: 2px 15px 2px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: #b1b1b1 1px solid;
+    background-color: #fff;
 }
+
+
 
 .div-tarjeta02 {
     width: 500px;
     height: 250px;
     border: 3px solid #77e47c;
-    border-radius: 4px;
     background-color: #77e47c;
-    font-family: "Segoe UI", Arial, sans-serif;
-    text-align: center;
 }
 
 .div-tarjeta03 {
@@ -30,7 +26,6 @@
     border: 3px solid #ff977d;
     border-radius: 4px;
     background-color: #ff977d;
-    font-family: "Segoe UI", Arial, sans-serif;
     text-align: center;
 }
 
@@ -40,6 +35,5 @@
     border: 3px solid #ffe46a;
     border-radius: 4px;
     background-color: #ffe46a;
-    font-family: "Segoe UI", Arial, sans-serif;
     text-align: center;
 }

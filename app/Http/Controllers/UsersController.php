@@ -24,9 +24,18 @@ class UsersController extends Controller
             Hash::check($request->password,$usuario->password))
         {
             Session::put('usuario',$usuario);
-            return redirect('proyecto');
+            return redirect('/proyecto');
         }
         Session::flash("error","Correo o contraseña incorrectos");
         return back()->with('error', 'Correo o contraseña incorrectos');
+    }
+
+    public function logout(Request $request)
+    {
+    // Elimina la sesión del usuario
+    $request->session()->forget('usuario');
+
+    // Redirige al usuario a la página de inicio de sesión u otra página deseada
+    return redirect('/login');
     }
 }

@@ -3,6 +3,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Proyecto;
+use App\Models\Rol;
 use App\Models\Usuario;
 
 class AdministrarProyectos extends Component
@@ -11,9 +12,13 @@ class AdministrarProyectos extends Component
     public $proyectoSeleccionado;
     public $nombre;
     public $descripcion;
+    public $fecha_entrega;
     public $search = '';
     public $usuario;
     public $refresh = 0;
+    public $proyectoId;
+    public $mostrarModal = false;
+    public $usuarios;
 
     public function mount()
     {
@@ -24,7 +29,7 @@ class AdministrarProyectos extends Component
     {
         $this->refresh++;
         $this->proyectos = Proyecto::buscarPorNombre($this->search);
-
+        $this->usuarios = Usuario::all();
         return view('livewire.administrar-proyectos', [
             'proyectos' => $this->proyectos->map(function ($proyecto) {
                 $proyecto->usuario_nombre = $proyecto->usuario->nombre ?? 'N/A';
@@ -69,6 +74,7 @@ class AdministrarProyectos extends Component
     {
         $this->nombre = '';
         $this->descripcion = '';
+        $this->fecha_entrega = null;
         $this->proyectoSeleccionado = null;
     }
 
@@ -76,14 +82,19 @@ class AdministrarProyectos extends Component
 
     public function agregarProyecto()
     {
-        // Obtener los proyectos antes de redirigir
-        $proyectos = Proyecto::all()->sortBy('nombre');
+        $proyecto=new Proyecto();
+        $proyecto->nombre=$this->nombre;
+        $proyecto->descripcion=$this->descripcion;
+        $proyecto->fecha_entrega=$this->fecha_entrega;
+        $proyecto->save();
+        $rol= new Rol();
+        $rol->proyecto_id=$proyecto->id;
+        $rol->rol="Scrum master";
+        $rol->save();
 
-        // Guardar los proyectos en la sesión flash
-        session()->flash('proyectos', $proyectos);
-
-        // Redirige a una nueva ruta donde se puede agregar un nuevo proyecto
-        return redirect()->to('/nuevo-proyecto');
+        // Limpiar los campos y actualizar la lista de proyectos
+        $this->limpiarCampos();
+        $this->proyectos = Proyecto::all()->sortBy('nombre');
     }
 
 
@@ -100,5 +111,30 @@ class AdministrarProyectos extends Component
 
         // Redireccionar después de agregar el proyecto
         return redirect()->to('/proyectos');
+    }
+
+     public function obtenerEsfuerzoEstimadoAcumulado($proyectoId)
+    {
+
+        $proyecto = Proyecto::with('historias.tareas')->find($proyectoId);
+        $esfuerzoTotal = 0;
+        if ($proyecto) {
+            foreach ($proyecto->historias as $historia) {
+                foreach ($historia->tareas as $tarea) {
+                    $esfuerzoTotal += $tarea->esfuerzo_estimado;  // Asumiendo que el campo es 'esfuerzo_estimado' en Tarea
+                }
+            }
+        }
+        return $esfuerzoTotal;
+    }
+
+    public function abrirModal()
+    {
+        $this->mostrarModal = true;
+    }
+
+    public function cerrarModal()
+    {
+        $this->mostrarModal = false;
     }
 }

@@ -10,6 +10,12 @@ class Proyecto extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'fecha_entrega'
+        // Agrega aquí otros campos que quieras permitir para la asignación masiva
+    ];
 
     public function historias()
     {
@@ -29,7 +35,7 @@ class Proyecto extends Model
         //inner join roles on (roles.usuario_id == usuarios.id)
         //where roles.rol = 'Scrum master' and roles.proyecto_id = $this.id
         return Usuario::join('roles','roles.usuario_id','usuarios.id')
-            ->where([['rol','Scrum master'],['proyecto_id',$this->id]])->get();
+            ->where([['rol','Scrum master'],['proyecto_id',$this->id]])->get()->first();
     }
 
     public function team_leaders() {}

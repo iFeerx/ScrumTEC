@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Proyecto;
 use App\Models\Usuario;
 
 class ProyectoFactory extends Factory
@@ -12,6 +11,7 @@ class ProyectoFactory extends Factory
     {
         return [
             "nombre" => fake()->name(),
+            "encargado_id" => Usuario::all()->random()->id,
             "descripcion" => fake()->paragraph(),
         ];
     }

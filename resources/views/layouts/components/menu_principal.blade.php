@@ -15,25 +15,26 @@
                 <!-- Lista de proyectos recientes -->
                 @if ($proyectos != null)
                 @foreach ($proyectos->sortByDesc('created_at')->take(5) as $proyecto)
-                <div class="dropdown-item">
+                <a class="dropdown-item" href="/proyecto/sprintBoard/{{ $proyecto->id }}">
                     {{ $proyecto->nombre }}
-                </div>
+                    <br><div class="propietario">Scrum master: {{ $proyecto->roles()->where('rol', 'Scrum master')->first()->usuario->nombre }}</div>
+                </a>
                 @endforeach
                 @endif
             </div>
         </li>
     </ul>
-    <a href="#" class="boton-Azul"><i class="fas fa-add" style="margin-right: 4px;"></i> Crear</a>
+    <a href="/nuevo-proyecto" class="boton-Azul"><i class="fas fa-add" style="margin-right: 4px;"></i> Crear</a>
     <div class="navbar-right">
         <a href="#" class="boton-Etiqueta">
             {{ Session::get('usuario')->nombre }}
         </a>
-        <a href="#" class="boton-Rojo"> <i class="fas fa-sign-out" style="margin-right: 4px;"></i> Cerrar Sesión</a>
+        <a href="/usuarios/logout" class="boton-Rojo"> <i class="fas fa-sign-out" style="margin-right: 4px;"></i> Cerrar Sesión</a>
     </div>
     @else
     <!-- Mostrar opciones para usuarios no autenticados -->
     <div class="navbar-right">
-        <a href="#" class="boton-Etiqueta">Registrarse</a>
+        <a href="/nuevo-proyecto" class="boton-Etiqueta">Registrarse</a>
         <a href="/usuarios/login" class="boton-Azul"><i class="fas fa-user" style="margin-right: 7px;"></i>Iniciar
             Sesión</a>
     </div>

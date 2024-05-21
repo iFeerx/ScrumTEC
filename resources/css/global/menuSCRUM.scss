@@ -56,7 +56,7 @@
     font-size: 14px;
     display: none;
     position: absolute;
-    background-color: #333740;
+    background-color: #333740f4;
     min-width: 120px;
     z-index: 1;
     padding: 12px;
@@ -68,17 +68,19 @@
     padding: 9px 5px;
     color: #a4a4a4;
     text-decoration: none;
+    font-size: 15px;
 }
 
 .dropdown-item:hover {
+    transition: 0.2s;
     background-color: #2b2e34;
     color: #ffff;
     cursor: pointer;
     border-radius: 6px;
-
 }
 
 .nav-item:hover .dropdown-menu {
+    transition: 0.2s;
     display: block;
 }
 
@@ -92,6 +94,12 @@
 
 .navbar-nav:hover{
     cursor: pointer;
-    border:#2d51b2 2px solid;
     padding: 10px;
+    transition: 0.3s;
+    background-color: #2b2e34af;
+}
+
+.propietario{
+    font-weight: normal;
+    font-size: 12px;
 }

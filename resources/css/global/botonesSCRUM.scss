@@ -12,7 +12,8 @@
     transition: background-color 0.3s ease;
     font-weight: bold;
     &:hover {
-        color:#0055af;
+        transition: 0.3s;
+        color:#0b81ff;
     }
     &:active {
         transform: translateY(1px);
@@ -69,11 +70,13 @@
     font-size: 15px;
     color: #fff;
     background-color: #f1b100;
+    border: #f1b100 1px solid;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
     &:hover {
         color:#f1b100;
+        border: #f1b100 1px solid;
         background-color: #ffffff;
     }
     &:active {
@@ -88,11 +91,13 @@
     font-size: 15px;
     color: #fff;
     background-color: #15bd12;
+    border: #15bd12 1px solid;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
     &:hover {
         color:#15bd12;
+        border: #15bd12 1px solid;
         background-color: #ffffff;
     }
     &:active {

@@ -10,6 +10,8 @@ form {
     border: #b8b8b8 1px solid;
     border-radius: 10px;
     background-color: #f9f9f9;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.35);
 }
 
 label {
@@ -23,13 +25,31 @@ input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     margin-bottom: 15px;
 }
 
-#center {
+textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#center{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
 }
