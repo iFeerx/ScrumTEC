@@ -33,7 +33,9 @@ class ProyectoDetalle extends Component
     public function render(){
         $this->proyecto = Proyecto::find($this->proyecto_id);
         return view('livewire.proyecto-detalle',
-        ['proyecto'=>$this->proyecto]);
+        ['proyecto'=>$this->proyecto])
+        ->layout('layouts.plantilla')
+        ->slot('main');
     }
 
     public function agregarHistoria()

@@ -1,6 +1,6 @@
 <div>
     <h1>Nombre: {{ $proyecto->nombre }}</h1>
-        <p>Scrum Master: {{ $proyecto->scrum_masters()->first()->nombre }}</p>
+        <p>Scrum Master: {{ $proyecto->scrumMasters->first()->nombre }}</p>
         <p>Descripción: {{ $proyecto->descripcion }}</p>
         <p>Fecha de entrega: {{ $proyecto->fecha_entrega }}</p>
         <p>Esfuerzo total: {{ $proyecto->esfuerzoTota }}</p>
