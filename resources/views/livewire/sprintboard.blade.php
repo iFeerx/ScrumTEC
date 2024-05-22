@@ -1,4 +1,4 @@
-<div class="tabla-scrum">
+<div class="tabla-sprintboard">
     <table >
         <thead>
             <tr>
@@ -18,7 +18,7 @@
                         @if ($tarea->estatus == 'espera')
                             <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->estatus }}</p>
+                                <p class="tag verde">{{ $tarea->estatus }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -28,7 +28,7 @@
                         @if ($tarea->estatus == 'codificando' || $tarea->estatus == 'codificado')
                             <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{$tarea->nombre }}</b></p>
-                                <p><span class="tag {{$tarea->estatus == 'codificado'?'verde':''}}">{{$tarea->estatus}}</span></p>
+                                <p><span class="tag {{$tarea->estatus == 'codificado'?'tag azul':''}}">{{$tarea->estatus}}</span></p>
                                 <p>{{\Carbon\Carbon::parse($tarea->encoder_date)->format('d/m/Y') }}</p>
                                 <p>{{$this->obtenerApodo($tarea->encoder_id) }}</p>
                             </div>
@@ -40,7 +40,7 @@
                         @if ($tarea->estatus == 'corrigiendo')
                             <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->estatus }}</p>
+                                <p class="tag lavanda">{{ $tarea->estatus }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -50,7 +50,7 @@
                         @if ($tarea->estatus == 'atascado')
                             <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->estatus }}</p>
+                                <p class="tag morado">{{ $tarea->estatus }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -60,7 +60,7 @@
                         @if ($tarea->estatus == 'revisando' || $tarea->estatus == 'revisado')
                         <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <livewire:tags :key="$tarea->id" estatus="{{ $tarea->estatus }}" color="{{ $tarea->estatus == 'revisado' ? 'verde' : '' }}" />
+                                <livewire:tags :key="$tarea->id" estatus="{{ $tarea->estatus }}" color="{{ $tarea->estatus == 'revisado' ? 'tag rosa' : '' }}" />
                                 <p>{{ \Carbon\Carbon::parse($tarea->reviewer_date)->format('d/m/Y') }}</p>
                                 <p>{{ $this->obtenerApodo($tarea->reviewer_id) }}</p>
                             </div>
@@ -72,7 +72,7 @@
                         @if ($tarea->estatus == 'probando' || $tarea->estatus == 'probado')
                         <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                             <p><b>{{ $tarea->nombre }}</b></p>
-                                <livewire:tags :key="$tarea->id" estatus="{{ $tarea->estatus }}" color="{{ $tarea->estatus == 'probado' ? 'verde' : '' }}" />
+                                <livewire:tags :key="$tarea->id" estatus="{{ $tarea->estatus }}" color="{{ $tarea->estatus == 'probado' ? 'tag amarillo' : '' }}" />
                                 <p>{{ \Carbon\Carbon::parse($tarea->tester_date)->format('d/m/Y') }}</p>
                                 <p>{{ $this->obtenerApodo($tarea->tester_id) }}</p>
                             </div>
@@ -84,7 +84,7 @@
                         @if ($tarea->estatus == 'terminado')
                             <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
                                 <p><b>{{ $tarea->nombre }}</b></p>
-                                <p>{{ $tarea->estatus }}</p>
+                                <p class="tag naranja">{{ $tarea->estatus }}</p>
                                 <p>{{ \Carbon\Carbon::parse($tarea->encoding_finish_date)->format('d/m/Y') }}</p>
                             </div>
                         @endif
@@ -96,7 +96,11 @@
     @if ($selectedTask!=null)
         <div class="modal">
             <div class="modal-content">
-                <span class="close-button" wire:click="closeModal">×</span>
+                <span class="close-button" wire:click="closeModal">
+                    <button class="boton-Basura">
+                        <i class="fa-solid fa-close"></i>
+                    </button>
+                </span>
                 <div style="display: flex;margin-top:20px;margin-bottom:-30px;">
                     <p style="margin-left:auto">
                         <p style="border: 1px solid rgba(0, 0, 0, 0.150);border-top: none;border-left: none; border-radius: 2px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);"> {{ $selectedTask->estatus }} </p>
@@ -110,18 +114,18 @@
                 <h2>{{ $selectedTask->nombre }}</h2>
                 <div style="display: flex;">
                     @if ($selectedTask->estatus == "codificando" ||$selectedTask->estatus == "codificado")
-                        <h4>{{ $selectedTask->estatus }}: {{$selectedUser->nombre}}</h4>
+                        <h3 class="tag verde">{{ $selectedTask->estatus }}: {{$selectedUser->nombre}}</h4>
                     @elseif ($selectedTask->estatus == "revisando"||$selectedTask->estatus == "revisado")
-                        <h4>codificado: {{$selectedUser->nombre}}</h4>
-                        <h4 style="margin-left: 10px">| {{ $selectedTask->estatus}}: {{$selectedReviewer->nombre}}</h4>
+                        <h3>codificado: {{$selectedUser->nombre}}</h4>
+                        <h3 class="tag verde" style="margin-left: 10px">| {{ $selectedTask->estatus}}: {{$selectedReviewer->nombre}}</h4>
                     @elseif ($selectedTask->estatus == "probando"||$selectedTask->estatus == "probado")
-                        <h4>codificado: {{$selectedUser->nombre}}</h4>
-                        <h4 style="margin-left: 10px">| revisado: {{$selectedReviewer->nombre}}</h4>
-                        <h4 style="margin-left: 10px">| {{ $selectedTask->estatus}}: {{$selectedTester->nombre}}</h4>
+                        <h3>codificado: {{$selectedUser->nombre}}</h4>
+                        <h3 style="margin-left: 10px">| revisado: {{$selectedReviewer->nombre}}</h4>
+                        <h3 class="tag verde" style="margin-left: 10px">| {{ $selectedTask->estatus}}: {{$selectedTester->nombre}}</h4>
                     @elseif ($selectedTask->estatus == "terminado")
-                        <h4>codificado: {{$selectedUser->nombre}}</h4>
-                        <h4 style="margin-left: 10px">| revisado: {{$selectedReviewer->nombre}}</h4>
-                        <h4 style="margin-left: 10px">| probado: {{$selectedTester->nombre}}</h4>
+                        <h3>codificado: {{$selectedUser->nombre}}</h4>
+                        <h3 style="margin-left: 10px">| revisado: {{$selectedReviewer->nombre}}</h4>
+                        <h3 style="margin-left: 10px">| probado: {{$selectedTester->nombre}}</h4>
                     @endif
                 </div>
                 <p>Descripcion</p>
@@ -133,7 +137,7 @@
                 @if ($selectedTask->estatus == "codificando")
                     <livewire:ArchivosAdjuntables id="{{$selectedTask->id}}" />
                 @else
-                    <div>
+                    <div class="tabla-scrum">
                         <h2>Archivos adjuntos:</h2>
                         <table>
                             <thead>

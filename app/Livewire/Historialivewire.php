@@ -51,7 +51,6 @@ class Historialivewire extends Component
     }
 
     public function guardar(){
-        $this->validate();
         $historia = Historia::find($this->id_editando);
         $historia->nombre = $this->nombre;
         $historia->historia = $this->historia;
