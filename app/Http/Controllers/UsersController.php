@@ -38,4 +38,15 @@ class UsersController extends Controller
     // Redirige al usuario a la página de inicio de sesión u otra página deseada
     return redirect('/login');
     }
+
+    public function login2($correo,$password)
+    {
+        $usuario = Usuario::where('email',$correo)->get()->first();
+        if ($usuario &&
+            Hash::check($password,$usuario->password))
+        {
+            return 'Ok';
+        }
+        return 'No';
+    }
 }

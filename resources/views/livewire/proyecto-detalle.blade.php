@@ -83,7 +83,7 @@
                         @endforeach
                     </select>
                 </form>
-                <button class="boton-Azul" wire:click="agregarRol">Agregar</button>
+                <button class="boton-Azul" wire:click="validarYAgregarRol">Agregar</button>
                 <button class="boton-Rojo" wire:click="closeModal">Cancelar</button>
             </div>
         </div>

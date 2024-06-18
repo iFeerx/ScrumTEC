@@ -6,15 +6,19 @@ use App\Models\Proyecto;
 use App\Models\Historia;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Models\Tarea;
 
 class Historialivewire extends Component
 {
     protected $historias;
     protected $proyectos;
+    public $tareas; // Colección de tareas
     public $id_editando = 0;
     public $nombre;
     public $proyecto_id;
     public $historia;
+    public $filtrarPorProyecto;
+    public $selectedHistoriaId = null; // ID de la historia seleccionada
 
     public function rules(): array
     {
@@ -27,12 +31,15 @@ class Historialivewire extends Component
 
     public function mount()
     {
-
+        $this->filtrarPorProyecto = Proyecto::all()->first()->id;
+        $this->historias = Historia::all();
+        $this->proyectos = Proyecto::all();
+        $this->tareas = collect(); // Inicializar como colección vacía
     }
 
     public function render(){
-        $historias = Historia::all();
         $proyectos = Proyecto::all();
+        $historias = Proyecto::find($this->filtrarPorProyecto)->historias;
         return view('livewire.historia-catalogo',
         ['historias'=>$historias, 'proyectos'=>$proyectos]);
     }
@@ -61,5 +68,11 @@ class Historialivewire extends Component
 
     public function cancelar(){
         $this->id_editando = 0;
+    }
+
+    public function cargarTareas($historiaId)
+    {
+        $this->selectedHistoriaId = $historiaId;
+        $this->tareas = Tarea::where('historia_id', $historiaId)->get();
     }
 }

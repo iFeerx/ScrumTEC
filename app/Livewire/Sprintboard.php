@@ -40,6 +40,10 @@ class Sprintboard extends Component
         $this->selectedTester = $this->selectedTask->tester;
         $this->selectedReviewer = $this->selectedTask->reviewer;
         $this->comentarios = $this->selectedTask->comentarios;
+        $hoy = now(); // Obtiene la fecha actual
+        if ($this->selectedTask->encoding_finish_date < $hoy) {
+            session()->flash('message', '¡Esta tarea está vencida!');
+        }
     }
 
     public function closeModal()

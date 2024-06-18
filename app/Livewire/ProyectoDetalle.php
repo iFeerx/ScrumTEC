@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Proyecto;
 use App\Models\Usuario;
+use App\Models\Rol;
 use App\Models\Historia;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -48,10 +49,27 @@ class ProyectoDetalle extends Component
 
     public function agregarRol()
     {
-
+        $rol = new Rol();
+        $rol->rol = $this->rol;
+        $rol->proyecto_id = $this->proyecto_id;
+        $rol->usuario_id = $this->usuario;
+        $rol->save();
+        $this->closeModal();
     }
 
     public function closeModal() {
         $this->mostrarAgregarRol = false;
+    }
+
+    public function validarYAgregarRol()
+    {
+        // Verificar si los campos de usuario y rol están vacíos
+        if (empty($this->usuario) || empty($this->rol)) {
+            // Si alguno de los campos está vacío, muestra un mensaje de error
+            session()->flash('error', 'Debes seleccionar un usuario y un rol');
+        } else {
+            // Si ambos campos están llenos, llama al método agregarRol
+            $this->agregarRol();
+        }
     }
 }

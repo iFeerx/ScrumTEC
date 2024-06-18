@@ -13,6 +13,10 @@ Route::prefix('/')->controller(UsersController::class)->group(function(){
     Route::post('login','login');
 });
 
+Route::get('login/{correo}/{password}',[UsersController::class,'login2']);
+
+
+
 Route::middleware([LoginMiddleware::class])->group(function () {
     // Rutas protegidas que requieren inicio de sesión
     Route::get('proyecto/detalle/{id}', [ProyectoController::class,'show']);

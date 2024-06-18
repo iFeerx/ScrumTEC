@@ -13,12 +13,20 @@ class Rol extends Model
     use HasFactory;
     protected $table="roles";
 
+    protected $fillable = [
+        'rol',
+        'proyecto_id',
+        'usuario_id'
+    ];
+
     public function proyecto()
     {
         return $this->hasOne(Proyecto::class,"id","proyecto_id");
     }
+
     public function usuario()
     {
         return $this->hasOne(Usuario::class,"id","usuario_id");
     }
+
 }

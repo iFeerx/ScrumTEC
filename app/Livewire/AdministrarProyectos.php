@@ -16,6 +16,7 @@ class AdministrarProyectos extends Component
     public $search = '';
     public $refresh = 0;
     public $proyectoId;
+    public $encargado_id = 0;
     public $mostrarModal = false;
     public $usuarios;
     public $usuario_id;

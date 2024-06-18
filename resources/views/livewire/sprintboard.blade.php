@@ -26,7 +26,8 @@
                 <td>
                     @foreach ($tareas as $tarea)
                         @if ($tarea->estatus == 'codificando' || $tarea->estatus == 'codificado')
-                            <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})">
+                            <div class="div-tarjeta01" data-id="{{ $tarea->id }}" wire:click="showTask({{ $tarea->id }})"
+                                style="{{ $tarea->encoding_finish_date < now() ? 'background-color: red;' : '' }}">
                                 <p><b>{{$tarea->nombre }}</b></p>
                                 <p><span class="tag {{$tarea->estatus == 'codificado'?'tag azul':''}}">{{$tarea->estatus}}</span></p>
                                 <p>{{\Carbon\Carbon::parse($tarea->encoder_date)->format('d/m/Y') }}</p>

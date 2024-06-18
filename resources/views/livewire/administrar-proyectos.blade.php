@@ -1,5 +1,5 @@
 <!-- resources/views/livewire/administrar-proyectos.blade.php -->
-<div>
+<div class="tabla-scrum">
     <h1>Proyectos</h1>
     <div>
         <label for="search">Buscar nombre de proyecto:</label>
@@ -13,7 +13,7 @@
                 <th style="width: 2%;">Id</th>
                 <th style="width: 10%;">Nombre Encargado</th>
                 <th style="width: 10%;">Nombre Proyecto</th>
-                <th style="width: 30%;" >Descripción</th>ss
+                <th style="width: 30%;" >Descripción</th>
                 <th style="width: 8%;">Fecha de Entrega</th>
                 <th style="width: 5%;">Esfuerzo requerido</th>
                 <th style="width: 5%;">Acciones</th>
@@ -78,7 +78,7 @@
                 <label for="fechaEntrega">Fecha Entrega:</label><br>
                 <input type="date" id="fecha_entrega" wire:model="fecha_entrega"><br>
                 <label for="Agregar Proyecto">Agregar Proyecto:</label><br>
-                <button wire:click.prevent="agregarProyecto">Agregar Proyecto</button>
+                <button wire:click.prevent="agregarProyecto" class="boton-Azul">Agregar Proyecto</button>
             </form>
         </div>
     </div>
