@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/')->controller(UsersController::class)->group(function () {
     Route::get('', 'vistaLogin');
     Route::post('login', 'login');
+    Route::get('logout', 'logout');
 });
 
 Route::get('login/{correo}/{password}', [UsersController::class, 'login2']);

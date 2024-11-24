@@ -44,7 +44,7 @@ class UsersController extends Controller
         $request->session()->forget('usuario');
 
         // Redirige al usuario a la página de inicio de sesión u otra página deseada
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function login2($correo, $password)

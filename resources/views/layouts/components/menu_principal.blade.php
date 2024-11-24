@@ -29,7 +29,7 @@
         <a href="#" class="boton-Etiqueta">
             {{ Session::get('usuario')->nombre }}
         </a>
-        <a href="/usuarios/logout" class="boton-Rojo"> <i class="fas fa-sign-out" style="margin-right: 4px;"></i> Cerrar Sesión</a>
+        <a href="/logout" class="boton-Rojo"> <i class="fas fa-sign-out" style="margin-right: 4px;"></i> Cerrar Sesión</a>
     </div>
     @else
     <!-- Mostrar opciones para usuarios no autenticados -->
