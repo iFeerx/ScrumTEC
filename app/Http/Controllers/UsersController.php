@@ -32,6 +32,8 @@ class UsersController extends Controller
         $usuario = Usuario::where('email', $request->email)->first();
         if ($usuario && Hash::check($request->password, $usuario->password)) {
             Session::put('usuario', $usuario);
+            // Manually set the user_id in the session
+            $request->session()->put('user_id', $usuario->id);
             return redirect('/proyecto');
         }
         Session::flash("error", "Correo o contraseña incorrectos");
