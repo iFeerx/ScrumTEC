@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>@yield('titulo')</title>
+        <title>@yield('titulo') - {{ env('USER_NAME') }}</title>
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
         @livewireStyles()
     </head>
