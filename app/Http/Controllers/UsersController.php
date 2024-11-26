@@ -12,7 +12,7 @@ class UsersController extends Controller
 {
     public function vistaLogin()
     {
-        
+        session_start();
         include("simple-php-captcha-master/simple-php-captcha.php");
         $captcha = simple_php_captcha();
         $_SESSION['captcha'] = $captcha;
