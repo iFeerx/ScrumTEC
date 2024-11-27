@@ -47,12 +47,12 @@ return [
 
             'read' => [
                 'host' => [
-                    env('DB_READ_HOST', '192.168.1.104'),
+                    env('DB_READ_HOST'),
                 ],
             ],
             'write' => [
                 'host' => [
-                    env('DB_WRITE_HOST', '192.168.1.227'),
+                    env('DB_WRITE_HOST'),
                 ],
             ],
 
