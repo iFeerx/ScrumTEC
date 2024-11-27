@@ -39,7 +39,7 @@ Route::middleware([LoginMiddleware::class])->group(function () {
 
 Route::get('/captcha', function() {
     $captcha_config = Session::get('_CAPTCHA');
-    
+
     if (!$captcha_config) {
         abort(404);
     }
@@ -125,4 +125,14 @@ Route::get('/captcha', function() {
     imagepng($captcha);
     imagedestroy($captcha);
     exit();
+});
+
+
+Route::get('/test-session', function () {
+    session(['test_key' => 'test_value']);
+    return 'Session data set.';
+});
+
+Route::get('/check-session', function () {
+    return session('test_key', 'Session data not found.');
 });
