@@ -12,19 +12,17 @@ class UsersController extends Controller
 {
     public function vistaLogin()
     {
-        session_start();
         include("simple-php-captcha-master/simple-php-captcha.php");
         $captcha = simple_php_captcha();
-        $_SESSION['captcha'] = $captcha;
-        Session::put('captcha', $captcha); // Store captcha in Laravel session
+        // Store captcha in Laravel session
+        Session::put('captcha', $captcha);
         $proyectos = Proyecto::latest()->take(5)->get(); // Obtén los últimos 5 proyectos
         return view('login', ['proyectos' => $proyectos, 'captcha' => $captcha]); // Pasa los proyectos a la vista
     }
 
     public function login(Request $request)
     {
-        session_start();
-        if ($_SESSION['captcha']['code'] != $request->captcha) {
+        if (Session::get('captcha.code') != $request->captcha) {
             Session::flash("error", "Captcha incorrecto");
             return back()->with('error', 'Captcha incorrecto');
         }
@@ -44,6 +42,7 @@ class UsersController extends Controller
     {
         // Elimina la sesión del usuario
         $request->session()->forget('usuario');
+        $request->session()->forget('user_id');
 
         // Redirige al usuario a la página de inicio de sesión u otra página deseada
         return redirect('/');
