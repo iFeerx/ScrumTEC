@@ -39,7 +39,7 @@ Route::middleware([LoginMiddleware::class])->group(function () {
 
 Route::get('/captcha', function() {
     $captcha_config = Session::get('_CAPTCHA');
-
+    
     if (!$captcha_config) {
         abort(404);
     }

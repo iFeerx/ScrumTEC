@@ -30,3 +30,15 @@
         </div>
     </main>
 @endsection
+
+
+@if (session('error'))
+    <div id="error" class="error">
+        {{ session('error') }}
+    </div>
+    <script>
+        setTimeout(function() {
+            document.getElementById('error').classList.add('oculto');
+        }, 3000);
+    </script>
+@endif

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\Proyecto;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
@@ -22,19 +23,19 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
+        // Debugging: Log the request data
+        Log::info('Login attempt:', $request->all());
+
         if (Session::get('captcha.code') != $request->captcha) {
-            Session::flash("error", "Captcha incorrecto");
             return back()->with('error', 'Captcha incorrecto');
         }
 
         $usuario = Usuario::where('email', $request->email)->first();
         if ($usuario && Hash::check($request->password, $usuario->password)) {
             Session::put('usuario', $usuario);
-            // Manually set the user_id in the session
             $request->session()->put('user_id', $usuario->id);
             return redirect('/proyecto');
         }
-        Session::flash("error", "Correo o contraseña incorrectos");
         return back()->with('error', 'Correo o contraseña incorrectos');
     }
 
