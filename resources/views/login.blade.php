@@ -23,7 +23,7 @@
                 <img src="{{ $captcha['image_src'] }}" alt="Captcha Image"><br>
                 <label for="captcha">Captcha:</label>
                 {{-- Display the captcha code for testing (remove in production) --}}
-                {{-- {{ Session::get('captcha.code') }} --}}
+                {{ $captcha['code'] }}
                 <input type="text" name="captcha"><br>
                 <input type="submit" value="Entrar" class="boton-Azul">
             </form>

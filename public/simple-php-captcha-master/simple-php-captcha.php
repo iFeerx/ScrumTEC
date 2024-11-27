@@ -17,8 +17,8 @@ function simple_php_captcha($config = array())
         throw new Exception('Required GD library is missing');
     }
 
-    $bg_path = dirname(__FILE__) . '/backgrounds/';
-    $font_path = dirname(__FILE__) . '/fonts/';
+    $bg_path = public_path('captcha/backgrounds/');
+    $font_path = public_path('captcha/fonts/');
 
     // Default values
     $captcha_config = array(
