@@ -71,7 +71,7 @@ function simple_php_captcha($config = array())
     Session::put('_CAPTCHA', $captcha_config);
 
     // Generate the image source URL
-    $captcha_config['image_src'] = url('/captcha') . '?t=' . urlencode(microtime());
+    $captcha_config['image_src'] = url('/captchaa') . '?t=' . urlencode(microtime());
 
     return array(
         'code' => $captcha_config['code'],
