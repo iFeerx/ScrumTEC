@@ -78,6 +78,13 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'read' => [
+            'host' => [env('DB_READ_HOST')],
+        ],
+        'write' => [
+            'host' => [env('DB_WRITE_HOST')],
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
