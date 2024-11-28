@@ -20,11 +20,10 @@
                 <input type="email" name="email"><br>
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password"><br>
-                <img src="{{ $captcha['image_src'] }}&rand={{ uniqid() }}" alt="Captcha Image"><br>
+                <img src="{{ $captcha['image_src'] }}" alt="Captcha Image"><br>
                 <label for="captcha">Captcha:</label>
-                <?php
-                echo $_SESSION['captcha']['code'];
-                ?>
+                {{-- Display the captcha code for testing (remove in production) --}}
+                {{ $captcha['code'] }}
                 <input type="text" name="captcha"><br>
                 <input type="submit" value="Entrar" class="boton-Azul">
             </form>

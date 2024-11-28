@@ -6,37 +6,36 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\Proyecto;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
     public function vistaLogin()
     {
-        session_start();
         include("simple-php-captcha-master/simple-php-captcha.php");
         $captcha = simple_php_captcha();
-        $_SESSION['captcha'] = $captcha;
-        Session::put('captcha', $captcha); // Store captcha in Laravel session
+        // Store captcha in Laravel session
+        Session::put('captcha', $captcha);
         $proyectos = Proyecto::latest()->take(5)->get(); // Obtén los últimos 5 proyectos
         return view('login', ['proyectos' => $proyectos, 'captcha' => $captcha]); // Pasa los proyectos a la vista
     }
 
     public function login(Request $request)
     {
-        session_start();
-        if ($_SESSION['captcha']['code'] != $request->captcha) {
-            Session::flash("error", "Captcha incorrecto");
+        // Debugging: Log the request data
+        Log::info('Login attempt:', $request->all());
+
+        if (Session::get('captcha.code') != $request->captcha) {
             return back()->with('error', 'Captcha incorrecto');
         }
 
         $usuario = Usuario::where('email', $request->email)->first();
         if ($usuario && Hash::check($request->password, $usuario->password)) {
             Session::put('usuario', $usuario);
-            // Manually set the user_id in the session
             $request->session()->put('user_id', $usuario->id);
             return redirect('/proyecto');
         }
-        Session::flash("error", "Correo o contraseña incorrectos");
         return back()->with('error', 'Correo o contraseña incorrectos');
     }
 
@@ -44,6 +43,7 @@ class UsersController extends Controller
     {
         // Elimina la sesión del usuario
         $request->session()->forget('usuario');
+        $request->session()->forget('user_id');
 
         // Redirige al usuario a la página de inicio de sesión u otra página deseada
         return redirect('/');
