@@ -117,16 +117,7 @@ Route::get('/captcha', function() {
             $captcha_config['code']
         );
     }
-
-    // Draw text
-    imagettftext($captcha, $font_size, $angle, $text_pos_x, $text_pos_y, $color, $font, $captcha_config['code']);
-
-    // Output image
-    imagepng($captcha);
-    imagedestroy($captcha);
-    exit();
-});
-
+})->middleware(['web'])->name('captcha');
 
 Route::get('/test-session', function () {
     session(['test_key' => 'test_value']);
