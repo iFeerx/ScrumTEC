@@ -20,8 +20,7 @@
                 <input type="email" name="email"><br>
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password"><br>
-                <img src="{{ $captcha['image_src'] }}" alt="Captcha Image"><br>
-                <label for="captcha">Captcha:</label>
+                <img src="{{ $captcha['image_src'] }}" alt="Captcha Image">                <label for="captcha">Captcha:</label>
                 {{-- Display the captcha code for testing (remove in production) --}}
                 {{ $captcha['code'] }}
                 <input type="text" name="captcha"><br>

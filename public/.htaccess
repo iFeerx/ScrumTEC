@@ -9,6 +9,15 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Allow direct access to images
+    RewriteRule \.(jpg|jpeg|png|gif)$ - [L]
+
+    # Handle CORS for captcha
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+        Header set Cache-Control "no-cache, must-revalidate"
+    </IfModule>
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$

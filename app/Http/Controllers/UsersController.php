@@ -13,12 +13,31 @@ class UsersController extends Controller
 {
     public function vistaLogin()
     {
-        include("simple-php-captcha-master/simple-php-captcha.php");
-        $captcha = simple_php_captcha();
-        // Store captcha in Laravel session
-        Session::put('captcha', $captcha);
-        $proyectos = Proyecto::latest()->take(5)->get(); // Obtén los últimos 5 proyectos
-        return view('login', ['proyectos' => $proyectos, 'captcha' => $captcha]); // Pasa los proyectos a la vista
+        try {
+            if (!file_exists("simple-php-captcha-master/simple-php-captcha.php")) {
+                Log::error("Captcha file not found");
+                throw new \Exception("Captcha file not found");
+            }
+
+            include("simple-php-captcha-master/simple-php-captcha.php");
+            $captcha = simple_php_captcha();
+
+            Log::info("Captcha generated:", [
+                'code' => $captcha['code'],
+                'image_src' => $captcha['image_src']
+            ]);
+
+            Session::put('captcha.code', $captcha['code']);
+
+            $proyectos = Proyecto::latest()->take(5)->get();
+            return view('login', [
+                'proyectos' => $proyectos,
+                'captcha' => $captcha
+            ]);
+        } catch (\Exception $e) {
+            Log::error("Error in vistaLogin: " . $e->getMessage());
+            throw $e;
+        }
     }
 
     public function login(Request $request)
