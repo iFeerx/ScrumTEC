@@ -88,7 +88,7 @@ Route::get('/captcha', function () {
         Log::error('Stack trace: ' . $e->getTraceAsString());
         return response('Error generating captcha: ' . $e->getMessage(), 500);
     }
-})->middleware(['web'])->withoutMiddleware([\App\Http\Middleware\VerifyCSRFToken::class])->name('captcha');
+})->middleware(['web'])->name('captcha');
 
 Route::get('/test-session', function () {
     session(['test_key' => 'test_value']);

@@ -27,11 +27,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    <Location "/captcha">
-    Order allow,deny
-    Allow from all
-    Satisfy any
-    </Location>
-
 </IfModule>
