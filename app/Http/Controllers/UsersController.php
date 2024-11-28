@@ -13,7 +13,7 @@ class UsersController extends Controller
 {
     public function vistaLogin()
     {
-        include(base_path("simple-php-captcha-master/simple-php-captcha.php"));
+        include("simple-php-captcha-master/simple-php-captcha.php");
         $captcha = simple_php_captcha();
         Session::put('captcha.code', $captcha['code']);
 
