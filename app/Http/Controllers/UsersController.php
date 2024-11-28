@@ -13,12 +13,15 @@ class UsersController extends Controller
 {
     public function vistaLogin()
     {
-        include("simple-php-captcha-master/simple-php-captcha.php");
+        include(base_path("simple-php-captcha-master/simple-php-captcha.php"));
         $captcha = simple_php_captcha();
-        // Store captcha in Laravel session
-        Session::put('captcha', $captcha);
-        $proyectos = Proyecto::latest()->take(5)->get(); // Obtén los últimos 5 proyectos
-        return view('login', ['proyectos' => $proyectos, 'captcha' => $captcha]); // Pasa los proyectos a la vista
+        Session::put('captcha.code', $captcha['code']);
+
+        $proyectos = Proyecto::latest()->take(5)->get();
+        return view('login', [
+            'proyectos' => $proyectos,
+            'captcha' => $captcha
+        ]);
     }
 
     public function login(Request $request)

@@ -6,6 +6,7 @@
 //
 //  See readme.md for usage, demo, and licensing info
 //
+use Illuminate\Support\Facades\Session;
 function simple_php_captcha($config = array()) {
 
     // Check for GD library
@@ -68,17 +69,11 @@ function simple_php_captcha($config = array()) {
         }
     }
 
-    // Generate HTML for image src
-    if ( strpos($_SERVER['SCRIPT_FILENAME'], $_SERVER['DOCUMENT_ROOT']) ) {
-        $image_src = substr(__FILE__, strlen( realpath($_SERVER['DOCUMENT_ROOT']) )) . '?_CAPTCHA&amp;t=' . urlencode(microtime());
-        $image_src = '/' . ltrim(preg_replace('/\\\\/', '/', $image_src), '/');
-    } else {
-        $_SERVER['WEB_ROOT'] = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['SCRIPT_FILENAME']);
-        $image_src = substr(__FILE__, strlen( realpath($_SERVER['WEB_ROOT']) )) . '?_CAPTCHA&amp;t=' . urlencode(microtime());
-        $image_src = '/' . ltrim(preg_replace('/\\\\/', '/', $image_src), '/');
-    }
+    // Replace the image_src generation with a simple route
+    $image_src = '/captcha?' . urlencode(microtime());
 
-    $_SESSION['_CAPTCHA']['config'] = serialize($captcha_config);
+    // Store the config in Laravel session
+    Session::put('_CAPTCHA', $captcha_config);
 
     return array(
         'code' => $captcha_config['code'],
