@@ -39,70 +39,45 @@ Route::middleware([LoginMiddleware::class])->group(function () {
 
 
 Route::get('/captcha', function () {
-    // Debug headers
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET');
+    // Force HTTPS for image URL
+    if (!request()->secure() && env('APP_ENV') === 'production') {
+        return redirect()->secure(request()->getRequestUri());
+    }
 
     $captcha_config = Session::get('_CAPTCHA');
-
     if (!$captcha_config) {
         Log::error('No captcha config found in session');
         abort(404);
     }
 
     try {
-        // Pick random background
         $background = $captcha_config['backgrounds'][mt_rand(0, count($captcha_config['backgrounds']) - 1)];
-        list($bg_width, $bg_height) = getimagesize($background);
 
-        $captcha = imagecreatefrompng($background);
-
-        // Set colors and text properties
-        $color = hex2rgb($captcha_config['color']);
-        $color = imagecolorallocate($captcha, $color['r'], $color['g'], $color['b']);
-
-        $font = $captcha_config['fonts'][mt_rand(0, count($captcha_config['fonts']) - 1)];
-        $font_size = mt_rand($captcha_config['min_font_size'], $captcha_config['max_font_size']);
-
-        // Calculate angle and position
-        $angle = mt_rand($captcha_config['angle_min'], $captcha_config['angle_max']);
-        $text_box_size = imagettfbbox($font_size, $angle, $font, $captcha_config['code']);
-
-        // Calculate text position
-        $box_width = abs($text_box_size[6] - $text_box_size[2]);
-        $box_height = abs($text_box_size[5] - $text_box_size[1]);
-        $text_pos_x = ($bg_width - $box_width) / 2;
-        $text_pos_y = ($bg_height + $box_height) / 2;
-
-        // Draw shadow if enabled
-        if ($captcha_config['shadow']) {
-            $shadow_color = hex2rgb($captcha_config['shadow_color']);
-            $shadow_color = imagecolorallocate($captcha, $shadow_color['r'], $shadow_color['g'], $shadow_color['b']);
-            imagettftext(
-                $captcha,
-                $font_size,
-                $angle,
-                $text_pos_x + $captcha_config['shadow_offset_x'],
-                $text_pos_y + $captcha_config['shadow_offset_y'],
-                $shadow_color,
-                $font,
-                $captcha_config['code']
-            );
+        // Verify file exists and is readable
+        if (!is_readable($background)) {
+            Log::error("Cannot read background file: $background");
+            abort(500);
         }
 
-        // Draw main text
-        imagettftext($captcha, $font_size, $angle, $text_pos_x, $text_pos_y, $color, $font, $captcha_config['code']);
+        $captcha = imagecreatefrompng($background);
+        if (!$captcha) {
+            Log::error("Failed to create image");
+            abort(500);
+        }
 
-        // Set headers and output image
+        // Clear any previous output
+        ob_clean();
+
+        // Set headers
         header('Content-Type: image/png');
         header('Cache-Control: no-cache, no-store, must-revalidate');
         header('Pragma: no-cache');
         header('Expires: 0');
 
+        // Output image
         imagepng($captcha);
         imagedestroy($captcha);
         exit();
-
     } catch (\Exception $e) {
         Log::error('Captcha generation failed: ' . $e->getMessage());
         abort(500);
