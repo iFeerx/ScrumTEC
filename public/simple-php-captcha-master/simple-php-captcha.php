@@ -52,7 +52,7 @@ function simple_php_captcha($config = array())
 
     // Store the captcha configuration in Laravel's session
     Session::put('_CAPTCHA', $captcha_config);
-    
+
     // Merge custom configurations
     if (is_array($config)) {
         $captcha_config = array_merge($captcha_config, $config);

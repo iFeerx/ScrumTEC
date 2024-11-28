@@ -39,51 +39,50 @@ Route::middleware([LoginMiddleware::class])->group(function () {
 
 
 Route::get('/captcha', function () {
-    // Force HTTPS for image URL
-    if (!request()->secure() && env('APP_ENV') === 'production') {
-        return redirect()->secure(request()->getRequestUri());
-    }
-
-    $captcha_config = Session::get('_CAPTCHA');
-    if (!$captcha_config) {
-        Log::error('No captcha config found in session');
-        abort(404);
-    }
-
     try {
-        $background = $captcha_config['backgrounds'][mt_rand(0, count($captcha_config['backgrounds']) - 1)];
-
-        // Verify file exists and is readable
-        if (!is_readable($background)) {
-            Log::error("Cannot read background file: $background");
-            abort(500);
+        $captcha_config = Session::get('_CAPTCHA');
+        if (!$captcha_config) {
+            Log::error('No captcha config found in session');
+            return response('Captcha config not found', 404);
         }
 
+        // Get random background
+        $background = $captcha_config['backgrounds'][array_rand($captcha_config['backgrounds'])];
+
+        if (!file_exists($background)) {
+            Log::error("Background file not found: $background");
+            return response('Background not found', 404);
+        }
+
+        // Create image
         $captcha = imagecreatefrompng($background);
-        if (!$captcha) {
-            Log::error("Failed to create image");
-            abort(500);
-        }
 
-        // Clear any previous output
-        ob_clean();
+        // Set colors
+        $color = hex2rgb($captcha_config['color']);
+        $color = imagecolorallocate($captcha, $color['r'], $color['g'], $color['b']);
 
-        // Set headers
-        header('Content-Type: image/png');
-        header('Cache-Control: no-cache, no-store, must-revalidate');
-        header('Pragma: no-cache');
-        header('Expires: 0');
+        // Add text
+        $font = $captcha_config['fonts'][array_rand($captcha_config['fonts'])];
+        $font_size = 28;
+        imagettftext($captcha, $font_size, 0, 10, 30, $color, $font, $captcha_config['code']);
+
+        Log::info('Background path:', ['path' => $background]);
+        Log::info('Font path:', ['path' => $font]);
 
         // Output image
-        imagepng($captcha);
-        imagedestroy($captcha);
-        exit();
+        return response()->stream(
+            function () use ($captcha) {
+                imagepng($captcha);
+                imagedestroy($captcha);
+            },
+            200,
+            ['Content-Type' => 'image/png']
+        );
     } catch (\Exception $e) {
-        Log::error('Captcha generation failed: ' . $e->getMessage());
-        abort(500);
+        Log::error('Captcha error: ' . $e->getMessage());
+        return response('Error generating captcha', 500);
     }
-})->middleware(['web'])->name('captcha');
-
+})->middleware('web')->name('captcha');
 
 Route::get('/test-session', function () {
     session(['test_key' => 'test_value']);
@@ -93,3 +92,19 @@ Route::get('/test-session', function () {
 Route::get('/check-session', function () {
     return session('test_key', 'Session data not found.');
 });
+
+
+function hex2rgb($hex)
+{
+    $hex = str_replace('#', '', $hex);
+    if (strlen($hex) == 3) {
+        $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
+        $g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
+        $b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
+    } else {
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+    }
+    return ['r' => $r, 'g' => $g, 'b' => $b];
+}
